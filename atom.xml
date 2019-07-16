@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://whatkong.github.io/"/>
-  <updated>2019-07-15T07:08:31.569Z</updated>
+  <updated>2019-07-15T07:11:09.851Z</updated>
   <id>https://whatkong.github.io/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://whatkong.github.io/2019/07/04/%E5%BC%80%E7%AF%87/"/>
     <id>https://whatkong.github.io/2019/07/04/开篇/</id>
     <published>2019-07-04T10:01:54.000Z</published>
-    <updated>2019-07-15T07:08:31.569Z</updated>
+    <updated>2019-07-15T07:11:09.851Z</updated>
     
-    <content type="html"><![CDATA[<img src="http://ww1.sinaimg.cn/large/95fef0ccly1g50c6wrq7pj20hs0vm43m.jpg" width="200"><p>多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。</p><p>SET 命令的行为可以通过一系列参数来修改：</p><p>EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。</p><p>PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET key value PX millisecond 效果等同于 PSETEX key millisecond value 。</p><p>NX ：只在键不存在时，才对键进行设置操作。 SET key value NX 效果等同于 SETNX key value 。</p><p>XX ：只在键已经存在时，才对键进行设置操作。</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ok = $redis-&gt;set($key, $random, array(&apos;nx&apos;, &apos;ex&apos; =&gt; $ttl));</span><br><span class="line"></span><br><span class="line">if ($ok) &#123;</span><br><span class="line">    //获取到锁</span><br><span class="line">    ... do something ...</span><br><span class="line">    if ($redis-&gt;get($key) == $random) &#123;</span><br><span class="line">        $redis-&gt;del($key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以看到上面我们我们的值引入了一个随机数，这是为了防止逻辑处理时间过长导致锁的过期时间已经失效，这时候下一个请求就获得了锁，但是前一个请求在逻辑处理完直接删除了锁。</p><p>锁主要用在并发请求如秒杀等场景中，以上便是redis锁的实现。</p>]]></content>
+    <content type="html"><![CDATA[<img src="http://ww1.sinaimg.cn/large/95fef0ccly1g50c6wrq7pj20hs0vm43m.jpg" width="200"><p>当多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。</p><p>SET 命令的行为可以通过一系列参数来修改：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。</span><br><span class="line"></span><br><span class="line">PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET key value PX millisecond 效果等同于 PSETEX key millisecond value 。</span><br><span class="line"></span><br><span class="line">NX ：只在键不存在时，才对键进行设置操作。 SET key value NX 效果等同于 SETNX key value 。</span><br><span class="line"></span><br><span class="line">XX ：只在键已经存在时，才对键进行设置操作。</span><br></pre></td></tr></table></figure><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ok = $redis-&gt;set($key, $random, array(&apos;nx&apos;, &apos;ex&apos; =&gt; $ttl));</span><br><span class="line"></span><br><span class="line">if ($ok) &#123;</span><br><span class="line">    //获取到锁</span><br><span class="line">    ... do something ...</span><br><span class="line">    if ($redis-&gt;get($key) == $random) &#123;</span><br><span class="line">        $redis-&gt;del($key);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>可以看到上面我们我们的值引入了一个随机数，这是为了防止逻辑处理时间过长导致锁的过期时间已经失效，这时候下一个请求就获得了锁，但是前一个请求在逻辑处理完直接删除了锁。</p><p>锁主要用在并发请求如秒杀等场景中，以上便是redis锁的实现。</p>]]></content>
     
     <summary type="html">
     
@@ -31,8 +31,8 @@
       
         &lt;img src=&quot;http://ww1.sinaimg.cn/large/95fef0ccly1g50c6wrq7pj20hs0vm43m.jpg&quot; width=&quot;200&quot;&gt;
 
-&lt;p&gt;多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。&lt;/p&gt;
-&lt;p&gt;SET 命
+&lt;p&gt;当多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。&lt;/p&gt;
+&lt;p&gt;SET 
       
     
     </summary>
