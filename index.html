@@ -355,6 +355,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://whatkong.github.io/2019/07/16/laravel-填充fake数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DT">
+      <meta itemprop="description" content="whatkong">
+      <meta itemprop="image" content="https://avatars1.githubusercontent.com/u/13249910?s=460&v=4">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Whatkong">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/16/laravel-填充fake数据/" class="post-title-link" itemprop="url">laravel 填充fake数据</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-07-16 16:03:28 / Modified: 16:06:01" itemprop="dateCreated datePublished" datetime="2019-07-16T16:03:28+08:00">2019-07-16</time>
+            </span>
+          
+
+          
+            
+
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li>生成迁移文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:migration create_users_table --create=users</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>修改迁移文件，添加/处理字段。</p>
+<ol start="2">
+<li><p>生成数据库表文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan migrate</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建model</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:model User</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建factory文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">php artisan make:factory UserFactory</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>修改对应的model,like this</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">$factory-&gt;define(User::class, function (Faker $faker) &#123;</span><br><span class="line">    return [</span><br><span class="line">        &apos;nickname&apos; =&gt; $faker-&gt;name,</span><br><span class="line">        &apos;avatar&apos;=&gt; $faker-&gt;imageUrl(),</span><br><span class="line">        &apos;email&apos;=&gt;$faker-&gt;email,</span><br><span class="line">        &apos;phone_number&apos;=&gt;$faker-&gt;phoneNumber,</span><br><span class="line">        &apos;password&apos; =&gt; $faker-&gt;password(6,20),</span><br><span class="line">        &apos;follow_count&apos; =&gt; $faker-&gt;randomDigit,</span><br><span class="line">        &apos;fans_count&apos; =&gt; $faker-&gt;randomDigit,</span><br><span class="line">        &apos;post_count&apos; =&gt; $faker-&gt;randomDigit,</span><br><span class="line">        &apos;word_count&apos; =&gt; $faker-&gt;randomDigit,</span><br><span class="line">        &apos;like_count&apos; =&gt; $faker-&gt;randomDigit,</span><br><span class="line">        &apos;oauth&apos; =&gt; json_encode([&apos;type&apos;=&gt;$faker-&gt;randomElement([&apos;Wechat&apos;,&apos;QQ&apos;,&apos;weibo&apos;])])</span><br><span class="line">    ];</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>创建访问路由<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Route::get(&apos;createArticles&apos;, function ()&#123;</span><br><span class="line">    factory(App\Article::class,100)-&gt;create();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>Over~~</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://whatkong.github.io/2019/07/04/开篇/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -415,7 +587,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-15 15:11:09" itemprop="dateModified" datetime="2019-07-15T15:11:09+08:00">2019-07-15</time>
+                <time title="Modified: 2019-07-16 16:06:01" itemprop="dateModified" datetime="2019-07-16T16:06:01+08:00">2019-07-16</time>
               </span>
             
           
@@ -549,7 +721,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -557,6 +729,21 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
               
             </nav>
           

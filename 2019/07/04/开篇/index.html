@@ -95,6 +95,7 @@
 
 
   <meta name="description" content="当多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。 SET 命令的行为可以通过一系列参数来修改： 1234567EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET k">
+<meta name="keywords" content="redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis锁的实现">
 <meta property="og:url" content="https://whatkong.github.io/2019/07/04/开篇/index.html">
@@ -102,7 +103,7 @@
 <meta property="og:description" content="当多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。 SET 命令的行为可以通过一系列参数来修改： 1234567EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET k">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/95fef0ccly1g50c6wrq7pj20hs0vm43m.jpg">
-<meta property="og:updated_time" content="2019-07-15T07:11:09.851Z">
+<meta property="og:updated_time" content="2019-07-16T08:06:01.474Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis锁的实现">
 <meta name="twitter:description" content="当多个进程不在同一个系统中，就需要用分布式锁控制多个进程对资源的访问。 SET 命令的行为可以通过一系列参数来修改： 1234567EX second ：设置键的过期时间为 second 秒。 SET key value EX second 效果等同于 SETEX key second value 。PX millisecond ：设置键的过期时间为 millisecond 毫秒。 SET k">
@@ -417,7 +418,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-15 15:11:09" itemprop="dateModified" datetime="2019-07-15T15:11:09+08:00">2019-07-15</time>
+                <time title="Modified: 2019-07-16 16:06:01" itemprop="dateModified" datetime="2019-07-16T16:06:01+08:00">2019-07-16</time>
               </span>
             
           
@@ -485,11 +486,36 @@
 
     <footer class="post-footer">
       
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/redis/" rel="tag"># redis</a>
+          
+        </div>
+      
 
       
       
       
 
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/laravel-填充fake数据/" rel="prev" title="laravel 填充fake数据">
+                laravel 填充fake数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
 
       
@@ -548,7 +574,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -556,6 +582,21 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
               
             </nav>
           
